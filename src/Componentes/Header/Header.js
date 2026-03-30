@@ -5,7 +5,7 @@ function Header(props) {
   return (
     <React.Fragment>
       <nav>
-        <ul className="main-nav">
+        <ul className="nav">
           {props.item.map((opcion, idx) => (
             <li key={opcion.name + idx}>
               <Link to={opcion.route}>{opcion.name}</Link>
