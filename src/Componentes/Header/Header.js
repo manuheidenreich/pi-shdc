@@ -12,12 +12,6 @@ function Header(props) {
             </li>
           ))}
         </ul>
-
-        <ul class="user">
-            <li>
-              {props.Username} <img src="./img/user.jpg" alt=""></img>
-            </li>
-        </ul>
       </nav>
     </React.Fragment>
   );
