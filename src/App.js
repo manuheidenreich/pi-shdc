@@ -10,11 +10,11 @@ function App() {
       name: "Home"
     },
     {
-      route: "/AboutUs",
-      name: "About Us"
+      route: "/Registro",
+      name: "Registro"
     },
     {
-      route: "/Registro",
+      route: "/Login",
       name: "Log in"
     },
     {
