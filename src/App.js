@@ -24,6 +24,11 @@ function App() {
     }
   ];
   
+fetch('https://api.themoviedb.org/3/movie/now_playing?api_key=7aa285e4357da2124c14f7534bfc86a0')
+  .then(res => res.json())
+  .then(res => console.log(res))
+  .catch(err => console.error(err));
+  
   return ( 
       <div className="app">
         <Header item={item}/>
