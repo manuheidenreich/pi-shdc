@@ -1,42 +1,17 @@
 import React, { Component } from "react";
 import FormBusqueda from "../../Componentes/FormBusqueda/FormBusqueda";
-import MovieCard from "../../Componentes/Movie_Card/Movie_Card";
-
-const apikey = "7aa285e4357da2124c14f7534bfc86a0";
+import SeccionPopulares from "../../Componentes/Seccion_Populares/SeccionPopulares";
+import SeccionCartelera from "../../Componentes/Seccion_Cartelera/SeccionCartelera";
 
 class Home extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            peliculas: []
-        };
-    }
-
-    componentDidMount() {
-        fetch("https://api.themoviedb.org/3/movie/popular?api_key=" + apikey)
-            .then((response) => response.json())
-            .then((data) => {
-                this.setState({
-                    peliculas: data.results
-                });
-            })
-            .catch((error) => console.log(error));
-    }
-
     render() {
         return (
             <div>
                 <FormBusqueda />
-
-                {this.state.peliculas.map((pelicula) => (
-                    <MovieCard
-                        key={pelicula.id}
-                        id={pelicula.id}
-                        nombre={pelicula.title}
-                        imagen={pelicula.poster_path}
-                        descripcion={pelicula.overview}
-                    />
-                ))}
+                <h1>Películas Populares</h1>
+                <SeccionPopulares/>
+                <h1>Películas Actualmente en Cartelera</h1>
+                <SeccionCartelera/>
             </div>
         );
     }

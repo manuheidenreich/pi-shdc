@@ -24,7 +24,7 @@ class MovieCard extends Component {
 
     render() {
         return (
-            <article className="Card">
+            <article className="cardBody ">
                 <img
                     src={`https://image.tmdb.org/t/p/w342/${this.props.imagen}`}
                     alt={this.props.nombre}
