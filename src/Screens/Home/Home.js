@@ -9,20 +9,9 @@ class Home extends Component {
             <div>
                 <FormBusqueda />
                 <h1>Películas Populares</h1>
-                <SeccionPopulares/>
+                <SeccionPopulares />
                 <h1>Películas Actualmente en Cartelera</h1>
-                <SeccionCartelera/>
-                
-
-                {this.state.peliculas.map((pelicula) => (
-                    <MovieCard
-                        key={pelicula.id}
-                        id={pelicula.id}
-                        nombre={pelicula.title}
-                        imagen={pelicula.poster_path}
-                        descripcion={pelicula.overview}
-                    />
-                ))}
+                <SeccionCartelera />
             </div>
         );
     }
