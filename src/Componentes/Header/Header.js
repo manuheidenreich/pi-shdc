@@ -10,11 +10,11 @@ class Header extends Component {
   }
   
   sesionIniciada(){
-    let sesionIniciada=localStorage.getItem("sesionIniciada")
-    this.setState={
-      sesion:sesionIniciada
+        let sesionIniciada=localStorage.getItem("sesionIniciada")
+        this.setState({
+            sesion:sesionIniciada
+        });
     }
-  }
 
   
   render(){

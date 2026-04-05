@@ -6,7 +6,8 @@ class MovieCard extends Component {
         super(props);
         this.state = {
             mostrarDescripcion: false,
-            esFavorito: false
+            esFavorito: false,
+            sesion:false
         };
     }
 
@@ -19,6 +20,13 @@ class MovieCard extends Component {
     agregarAFavoritos() {
         this.setState({
             esFavorito: !this.state.esFavorito
+        });
+    }
+
+    sesionIniciada(){
+        let sesionIniciada=localStorage.getItem("sesionIniciada")
+        this.setState({
+            sesion:sesionIniciada
         });
     }
 
@@ -47,9 +55,12 @@ class MovieCard extends Component {
                     <button>Ir a detalle</button>
                 </Link>
 
-                <button onClick={() => this.agregarAFavoritos()}>
+                {this.state.sesion===true ? 
+                    <button onClick={() => this.agregarAFavoritos()}>
                     {this.state.esFavorito ? "Eliminar de favoritos" : "Agregar a favoritos"}
-                </button>
+                    </button>
+                    : null
+                }
             </article>
         );
     }
