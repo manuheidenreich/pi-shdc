@@ -5,7 +5,6 @@ class MovieCard extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            mostrarDescripcion: false,
             esFavorito: false,
             sesion: false
         };
@@ -19,12 +18,6 @@ class MovieCard extends Component {
         });
     }
 
-    mostrarDescripcion() {
-        this.setState({
-            mostrarDescripcion: !this.state.mostrarDescripcion
-        });
-    }
-
     agregarAFavoritos() {
         this.setState({
             esFavorito: !this.state.esFavorito
@@ -33,21 +26,22 @@ class MovieCard extends Component {
 
     render() {
         return (
-            <article className="cardBody">
+            <article className="single-card-movie">
                 <img
+                    className="card-img-top"
                     src={`https://image.tmdb.org/t/p/w342${this.props.imagen}`}
                     alt={this.props.nombre}
                 />
-
-                <h1 className="titulo">{this.props.nombre}</h1>
+                <div className="cardBody">
+                    <h5 className="card-title">{this.props.nombre}</h5>
 
                 {this.state.mostrarDescripcion ? (
-                    <p className="descripcion">{this.props.descripcion}</p>
+                    <p className="card-text">{this.props.descripcion}</p>
                 ) : null}
 
                 <button
                     onClick={() => this.mostrarDescripcion()}
-                    className="mostrarDescripcionBoton"
+                    className="btn btn-primary"
                 >
                     {this.state.mostrarDescripcion ? "Ver menos" : "Ver descripción"}
                 </button>
@@ -57,12 +51,13 @@ class MovieCard extends Component {
                 </Link>
 
                 {this.state.sesion ? (
-                    <button onClick={() => this.agregarAFavoritos()}>
+                    <button className="btn alert-primary" onClick={() => this.agregarAFavoritos()}>
                         {this.state.esFavorito
                             ? "Eliminar de favoritos"
                             : "Agregar a favoritos"}
                     </button>
                 ) : null}
+                </div>
             </article>
         );
     }

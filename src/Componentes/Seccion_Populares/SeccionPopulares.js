@@ -24,7 +24,7 @@ class SeccionPopulares extends Component {
 
     render() {
         return (
-            <div className="cards">
+            <div className="row cards" id="movies">
                 {this.state.peliculas.map((pelicula) => (
                     <MovieCard
                         key={pelicula.id}

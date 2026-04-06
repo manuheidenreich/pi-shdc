@@ -13,34 +13,18 @@ class Results extends Component {
     }
 
     componentDidMount() {
-        this.buscarResultados();
-    }
-
-
-    buscarResultados() {
-        const tipo = this.props.match.params.tipo;
-        const nombre = this.props.match.params.nombre;
-
-        fetch(`https://api.themoviedb.org/3/search/${tipo}?api_key=${apikey}&query=${nombre}`)
+        fetch(`https://api.themoviedb.org/3/search/${this.props.match.params.tipo}?api_key=${apikey}&query=${this.props.match.params.nombre}`)
             .then((response) => response.json())
             .then((data) =>
                 this.setState({
-                    resultados: data.results || [],
+                    resultados: data.results,
                     cargando: false
                 })
             )
-            .catch((error) => {
-                console.log(error);
-                this.setState({
-                    resultados: [],
-                    cargando: false
-                });
-            });
+            .catch((error) => {console.log(error)});
     }
 
     render() {
-        const tipo = this.props.match.params.tipo;
-
         return (
             <div>
                 <h1>
@@ -57,7 +41,7 @@ class Results extends Component {
                             <MovieCard
                                 key={item.id}
                                 id={item.id}
-                                nombre={tipo === "movie" ? item.title : item.name}
+                                nombre={this.props.match.params.tipo === "movie" ? item.title : item.name}
                                 descripcion={item.overview}
                                 imagen={item.poster_path}
                             />

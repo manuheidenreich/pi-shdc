@@ -28,26 +28,23 @@ class FormBusqueda extends Component {
 
     render() {
         return (
-            <div className="FormBusqueda">
-                <form onSubmit={(e) => this.ejecutarBusqueda(e)}>
-                    <select
-                        name="tipo"
-                        value={this.state.tipo}
-                        onChange={(e) => this.controlarCambios(e)}
-                    >
-                        <option value="movie">Películas</option>
-                        <option value="tv">Series</option>
-                    </select>
-
-                    <input
+            <div >
+                <form className="search-form" onSubmit={(e) => this.ejecutarBusqueda(e)}>
+                    <section className="search-form-left">
+                        <input
                         type="text"
                         name="valor"
                         onChange={(e) => this.controlarCambios(e)}
                         value={this.state.valor}
                         placeholder="Buscar..."
-                    />
-
-                    <button type="submit">Buscar</button>
+                        >
+                        </input>
+                        <section className="search-form-radio-container">
+                            <button className="search-form-radio" type="radio">Películas</button>
+                            <button className="search-form-radio" type="radio">Series</button>
+                        </section>
+                    </section>
+                    <button className="btn btn-success btn-sm" type="submit">Buscar</button>
                 </form>
             </div>
         );

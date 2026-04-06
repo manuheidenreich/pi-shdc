@@ -25,24 +25,17 @@ class Header extends Component {
 
     return (
       <React.Fragment>
-        <nav className="nav">
+        <nav>
           {this.state.sesion===true ? 
-              <ul>
-                <li><Link to="/">Home</Link></li>
-                <li><Link to="/Favorites">Favorites</Link></li>
-                <button
-                    onClick={() => this.cerrarSesion()}
-                    th
-                   className="mostrarDescripcionBoton"
-                >
-                    {this.state.mostrarDescripcion ? "Ver menos" : "Ver descripción"}
-                </button>
+              <ul className="nav nav-tabs my-4">
+                <li className="nav-item"><Link className="nav-link"to="/">Home</Link></li>
+                <li className="nav-item"><Link className="nav-link" to="/Favorites">Favorites</Link></li>
               </ul> 
               :
-              <ul>
-                <li><Link to="/">Home</Link></li>
-                <li><Link to="/Registro">Registro</Link></li>
-                <li><Link to="/Login">Login</Link></li>
+              <ul className="nav nav-tabs my-4">
+                <li className="nav-item"><Link className="nav-link" to="/">Home</Link></li>
+                <li className="nav-item"><Link className="nav-link" to="/Registro">Registro</Link></li>
+                <li className="nav-item"><Link className="nav-link" to="/Login">Login</Link></li>
               </ul> 
           }
         </nav>

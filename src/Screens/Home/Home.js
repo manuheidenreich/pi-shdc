@@ -8,9 +8,9 @@ class Home extends Component {
         return (
             <div>
                 <FormBusqueda />
-                <h1>Películas Populares</h1>
+                <h2 className="alert alert-primary">Películas Populares</h2>
                 <SeccionPopulares />
-                <h1>Películas Actualmente en Cartelera</h1>
+                <h2 className="alert alert-primary">Películas Actualmente en Cartelera</h2>
                 <SeccionCartelera />
             </div>
         );
