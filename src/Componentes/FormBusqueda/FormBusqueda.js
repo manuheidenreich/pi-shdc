@@ -16,6 +16,16 @@ class FormBusqueda extends Component {
         });
     }
 
+    elegirSerie(e){
+        e.preventDefault();
+        this.setState({tipo:"tv"})
+    }
+
+    elegirPelicula(e){
+        e.preventDefault();    
+        this.setState({tipo:"movie"})
+        }
+
     ejecutarBusqueda(e) {
         e.preventDefault();
 
@@ -40,8 +50,16 @@ class FormBusqueda extends Component {
                         >
                         </input>
                         <section className="search-form-radio-container">
-                            <button className="search-form-radio" type="radio">Películas</button>
-                            <button className="search-form-radio" type="radio">Series</button>
+                            <label for="serie">Series</label>
+                            <input
+                                name="serie"
+                                onClick={(e)=>this.elegirSerie(e)}
+                                className="search-form-radio" type="radio"/>
+                            <label for="peli">Películas</label>
+                            <input
+                                name="peli"
+                                onClick={(e)=>this.elegirPelicula(e)}
+                                className="search-form-radio" type="radio"/>
                         </section>
                     </section>
                     <button className="btn btn-success btn-sm" type="submit">Buscar</button>

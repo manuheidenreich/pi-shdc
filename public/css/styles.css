@@ -22,6 +22,10 @@ nav {
     grid-template-columns: 5fr 1fr;
     column-gap: 5px;
 }
+.logo{
+    width: auto;
+    height:50px;
+}
 .filter-form {
     grid-template-columns: 1fr;
 }
