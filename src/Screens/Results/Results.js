@@ -16,14 +16,6 @@ class Results extends Component {
         this.buscarResultados();
     }
 
-    componentDidUpdate(prevProps) {
-        if (
-            prevProps.match.params.nombre !== this.props.match.params.nombre ||
-            prevProps.match.params.tipo !== this.props.match.params.tipo
-        ) {
-            this.buscarResultados();
-        }
-    }
 
     buscarResultados() {
         const tipo = this.props.match.params.tipo;
