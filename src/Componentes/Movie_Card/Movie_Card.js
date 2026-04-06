@@ -35,19 +35,12 @@ class MovieCard extends Component {
                 <div className="cardBody">
                     <h5 className="card-title">{this.props.nombre}</h5>
 
-                {this.state.mostrarDescripcion ? (
+                
                     <p className="card-text">{this.props.descripcion}</p>
-                ) : null}
-
-                <button
-                    onClick={() => this.mostrarDescripcion()}
-                    className="btn btn-primary"
-                >
-                    {this.state.mostrarDescripcion ? "Ver menos" : "Ver descripción"}
-                </button>
+    
 
                 <Link to={`/detalle/${this.props.id}`}>
-                    <button>Ir a detalle</button>
+                    <button className="btn btn-primary">Ir a detalle</button>
                 </Link>
 
                 {this.state.sesion ? (

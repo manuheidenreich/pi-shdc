@@ -30,12 +30,14 @@ class Header extends Component {
               <ul className="nav nav-tabs my-4">
                 <li className="nav-item"><Link className="nav-link"to="/">Home</Link></li>
                 <li className="nav-item"><Link className="nav-link" to="/Favorites">Favorites</Link></li>
+                <li><img src="/img/imagen_logo.png" alt="logo" /> </li>
               </ul> 
               :
               <ul className="nav nav-tabs my-4">
                 <li className="nav-item"><Link className="nav-link" to="/">Home</Link></li>
                 <li className="nav-item"><Link className="nav-link" to="/Registro">Registro</Link></li>
                 <li className="nav-item"><Link className="nav-link" to="/Login">Login</Link></li>
+                <li><img src="/img/imagen_logo.png" alt="logo" /> </li>
               </ul> 
           }
         </nav>
