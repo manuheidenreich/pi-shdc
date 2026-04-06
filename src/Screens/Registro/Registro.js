@@ -27,7 +27,7 @@ class Registro extends Component {
         }
 
         let usuarioExistente = usuariosParseados.find(
-            (usuario) => usuario.email === this.state.email.trim().toLowerCase()
+            (usuario) => usuario.email === this.state.email.toLowerCase()
         );
 
         if (usuarioExistente) {

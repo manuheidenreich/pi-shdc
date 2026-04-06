@@ -27,7 +27,7 @@ class Login extends Component {
         }
 
         let usuarioEncontrado = usuariosParseados.find(
-            (usuario) => usuario.email === this.state.email.trim().toLowerCase()
+            (usuario) => usuario.email === this.state.email.toLowerCase()
         );
 
         if (

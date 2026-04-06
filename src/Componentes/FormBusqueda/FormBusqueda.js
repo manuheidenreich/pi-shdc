@@ -19,7 +19,7 @@ class FormBusqueda extends Component {
     ejecutarBusqueda(e) {
         e.preventDefault();
 
-        if (this.state.valor.trim() === "") {
+        if (this.state.valor=== "") {
             return;
         }
 
