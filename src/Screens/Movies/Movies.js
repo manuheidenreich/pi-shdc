@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import MovieCard from "../../Componentes/Movie_Card/Movie_Card";
+const apikey = "7aa285e4357da2124c14f7534bfc86a0";
 
 class Movies extends Component {
   constructor(props) {
@@ -11,7 +12,7 @@ class Movies extends Component {
   }
 
   componentDidMount() {
-    fetch("") ///Aca va el endpoin, lo tengo que buscar
+    fetch("https://api.themoviedb.org/3/movie/popular?api_key=" + apikey)
       .then(response => response.json())
       .then(data =>
         this.setState({

@@ -40,8 +40,8 @@ class Login extends Component {
             return;
         }
 
-        sessionStorage.setItem("sesionIniciada", "true");
-        sessionStorage.setItem("usuarioLogueado", usuarioEncontrado.email);
+        localStorage.setItem("sesionIniciada", true);
+        localStorage.setItem("usuarioLogueado", usuarioEncontrado.email);
 
         this.setState({
             email: "",

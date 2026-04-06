@@ -7,8 +7,16 @@ class MovieCard extends Component {
         this.state = {
             mostrarDescripcion: false,
             esFavorito: false,
-            sesion:false
+            sesion: false
         };
+    }
+
+    componentDidMount() {
+        let sesionIniciada = sessionStorage.getItem("sesionIniciada");
+
+        this.setState({
+            sesion:sesionIniciada 
+        });
     }
 
     mostrarDescripcion() {
@@ -23,18 +31,11 @@ class MovieCard extends Component {
         });
     }
 
-    sesionIniciada(){
-        let sesionIniciada=localStorage.getItem("sesionIniciada")
-        this.setState({
-            sesion:sesionIniciada
-        });
-    }
-
     render() {
         return (
-            <article className="cardBody ">
+            <article className="cardBody">
                 <img
-                    src={`https://image.tmdb.org/t/p/w342/${this.props.imagen}`}
+                    src={`https://image.tmdb.org/t/p/w342${this.props.imagen}`}
                     alt={this.props.nombre}
                 />
 
@@ -55,18 +56,16 @@ class MovieCard extends Component {
                     <button>Ir a detalle</button>
                 </Link>
 
-                {this.state.sesion===true ? 
+                {this.state.sesion ? (
                     <button onClick={() => this.agregarAFavoritos()}>
-                    {this.state.esFavorito ? "Eliminar de favoritos" : "Agregar a favoritos"}
+                        {this.state.esFavorito
+                            ? "Eliminar de favoritos"
+                            : "Agregar a favoritos"}
                     </button>
-                    : null
-                }
+                ) : null}
             </article>
         );
     }
 }
 
-
-
 export default MovieCard;
-

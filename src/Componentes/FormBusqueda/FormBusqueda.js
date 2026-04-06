@@ -1,34 +1,57 @@
-import React,{Component } from "react";
-import { withRouter } from "react-router-dom/cjs/react-router-dom.min";
+import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
 
 class FormBusqueda extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
-            valor: ""
-        }
-    }
-    
-
-    controlarCambios(e){
-        this.setState({valor:e.target.value})
+            valor: "",
+            tipo: "movie"
+        };
     }
 
-    ejecutarBusqueda(e,id){
+    controlarCambios(e) {
+        this.setState({
+            [e.target.name]: e.target.value
+        });
+    }
+
+    ejecutarBusqueda(e) {
         e.preventDefault();
-        this.props.history.push("./Screens/Results/Results/" + this.state.valor)
+
+        if (this.state.valor.trim() === "") {
+            return;
+        }
+
+        this.props.history.push(`/results/${this.state.tipo}/${this.state.valor}`);
     }
 
-    render(){
-        return(
+    render() {
+        return (
             <div className="FormBusqueda">
-                <form>
-                    <input type="text" onChange={(e=>this.controlarCambios(e))} value={this.state.valor}></input>
-                    <button type="submit" onClick={(e)=>this.ejecutarBusqueda(e)}>Buscar</button>
+                <form onSubmit={(e) => this.ejecutarBusqueda(e)}>
+                    <select
+                        name="tipo"
+                        value={this.state.tipo}
+                        onChange={(e) => this.controlarCambios(e)}
+                    >
+                        <option value="movie">Películas</option>
+                        <option value="tv">Series</option>
+                    </select>
+
+                    <input
+                        type="text"
+                        name="valor"
+                        onChange={(e) => this.controlarCambios(e)}
+                        value={this.state.valor}
+                        placeholder="Buscar..."
+                    />
+
+                    <button type="submit">Buscar</button>
                 </form>
             </div>
-        )
+        );
     }
 }
 
-export default withRouter(FormBusqueda)
+export default withRouter(FormBusqueda);
