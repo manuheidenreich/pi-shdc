@@ -12,7 +12,8 @@ class Card extends Component {
 
     componentDidMount() {
         let sesionIniciada = sessionStorage.getItem("sesionIniciada");
-
+        let arrayfavoritosMovie = JSON.parse(localStorage.getItem("favoritosMovie"))
+        let arrayfavoritosSerie = JSON.parse(localStorage.getItem("favoritosSerie"))
         this.setState({
             sesion:sesionIniciada 
         });
@@ -22,6 +23,12 @@ class Card extends Component {
         this.setState({
             esFavorito: !this.state.esFavorito
         });
+        if (this.props.tipo==="movie"){
+            localStorage.setItem("favoritoMovie",arrayfavoritosMovie.push(this.props.id))
+        }
+        if (this.props.tipo==="tv"){
+            localStorage.setItem("favoritoMovie",arrayfavoritosSerie.push(this.props.id))
+        }
     }
 
     render() {
@@ -46,8 +53,8 @@ class Card extends Component {
                 {this.state.sesion ? (
                     <button className="btn alert-primary" onClick={() => this.agregarAFavoritos()}>
                         {this.state.esFavorito
-                            ? "Eliminar de favoritos"
-                            : "Agregar a favoritos"}
+                            ? "♥️"
+                            : "🩶"}
                     </button>
                 ) : null}
                 </div>
