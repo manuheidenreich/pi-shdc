@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import MovieCard from "../../Componentes/Movie_Card/Movie_Card";
+import Card from "../../Componentes/Card/Card";
 
 const apikey = "7aa285e4357da2124c14f7534bfc86a0";
 
@@ -38,7 +38,7 @@ class Results extends Component {
                 ) : (
                     <section className="cards">
                         {this.state.resultados.map((item) => (
-                            <MovieCard
+                            <Card
                                 key={item.id}
                                 id={item.id}
                                 nombre={this.props.match.params.tipo === "movie" ? item.title : item.name}

@@ -1,9 +1,9 @@
 import React,{ Component } from "react";
-import MovieCard from "../../Componentes/Movie_Card/Movie_Card";
+import Card from "../Card/Card";
 
 const apikey = "7aa285e4357da2124c14f7534bfc86a0";
 
-class SeccionPopulares extends Component {
+class SeccionPelisCartelera extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -12,7 +12,7 @@ class SeccionPopulares extends Component {
     }
 
     componentDidMount() {
-        fetch("https://api.themoviedb.org/3/movie/popular?api_key=" + apikey)
+        fetch("https://api.themoviedb.org/3/movie/now_playing?api_key=" + apikey)
             .then((response) => response.json())
             .then((data) => {
                 this.setState({
@@ -24,14 +24,15 @@ class SeccionPopulares extends Component {
 
     render() {
         return (
-            <div className="row cards" id="movies">
+            <div className="cards">
                 {this.state.peliculas.map((pelicula) => (
-                    <MovieCard
+                    <Card
                         key={pelicula.id}
                         id={pelicula.id}
                         nombre={pelicula.title}
                         imagen={pelicula.poster_path}
                         descripcion={pelicula.overview}
+                        tipo="movie"
                     />
                 ))}
             </div>
@@ -39,4 +40,4 @@ class SeccionPopulares extends Component {
     }
 }
 
-export default SeccionPopulares;
+export default SeccionPelisCartelera;

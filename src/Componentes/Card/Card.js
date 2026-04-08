@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
-class MovieCard extends Component {
+class Card extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -39,7 +39,7 @@ class MovieCard extends Component {
                     <p className="card-text">{this.props.descripcion}</p>
     
 
-                <Link to={`/detalle/${this.props.id}`}>
+                <Link to={`/detalle${this.props.tipo}/${this.props.id}`}>
                     <button className="btn btn-primary">Ir a detalle</button>
                 </Link>
 
@@ -56,4 +56,4 @@ class MovieCard extends Component {
     }
 }
 
-export default MovieCard;
+export default Card;

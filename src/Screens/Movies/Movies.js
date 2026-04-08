@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import MovieCard from "../../Componentes/Movie_Card/Movie_Card";
+import Card from "../../Componentes/Card/Card";
 const apikey = "7aa285e4357da2124c14f7534bfc86a0";
 
 class Movies extends Component {
@@ -48,7 +48,7 @@ class Movies extends Component {
 
         <section>
           {peliculasFiltradas.map((pelicula, idx) => (
-            <MovieCard
+            <Card
               key={pelicula.id || idx}
               id={pelicula.id}
               nombre={pelicula.title}

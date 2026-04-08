@@ -5,9 +5,10 @@ import Footer from "./Componentes/Footer/Footer";
 import Home from "./Screens/Home/Home";
 import Registro from "./Screens/Registro/Registro";
 import Login from "./Screens/Login/Login";
-import Movies from "./Screens/Movies/Movies";
 import Results from "./Screens/Results/Results";
 import Error from "./Screens/Error/Error";
+import DetallePelicula from "./Screens/detallepeli/detallemovie";
+import DetalleSerie from "./Screens/detalleserie/detalletv"
 
 function App() {
   return (
@@ -17,7 +18,8 @@ function App() {
         <Route path="/" exact={true} component={Home} />
         <Route path="/login" component={Login} />
         <Route path="/registro" component={Registro} />
-        <Route path="/movie" component={Movies} />
+        <Route path="/detallemovie/:id" component={DetallePelicula} />
+        <Route path="/detalletv/:id" component={DetalleSerie} />
         <Route path="/results/:tipo/:nombre" component={Results} />
         <Route component={Error} />
       </Switch>
