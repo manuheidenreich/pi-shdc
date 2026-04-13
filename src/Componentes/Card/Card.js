@@ -12,23 +12,29 @@ class Card extends Component {
 
     componentDidMount() {
         let sesionIniciada = sessionStorage.getItem("sesionIniciada");
-        let arrayfavoritosMovie = JSON.parse(localStorage.getItem("favoritosMovie"))
-        let arrayfavoritosSerie = JSON.parse(localStorage.getItem("favoritosSerie"))
         this.setState({
             sesion:sesionIniciada 
         });
     }
 
     agregarAFavoritos() {
+        let arrayfavoritosMovie = JSON.parse(localStorage.getItem("favoritosMovie")) || [];
+        let arrayfavoritosSerie = JSON.parse(localStorage.getItem("favoritosSerie")) || [];
+
         this.setState({
-            esFavorito: !this.state.esFavorito
-        });
-        if (this.props.tipo==="movie"){
-            localStorage.setItem("favoritoMovie",arrayfavoritosMovie.push(this.props.id))
-        }
-        if (this.props.tipo==="tv"){
-            localStorage.setItem("favoritoMovie",arrayfavoritosSerie.push(this.props.id))
-        }
+        esFavorito: !this.state.esFavorito
+    });
+
+    if (this.props.tipo === "movie") {
+        arrayfavoritosMovie.push(this.props.id);
+        localStorage.setItem("favoritosMovie", JSON.stringify(arrayfavoritosMovie));
+    }    
+
+    if (this.props.tipo === "tv") {
+        arrayfavoritosSerie.push(this.props.id);
+        localStorage.setItem("favoritosSerie", JSON.stringify(arrayfavoritosSerie));
+    }
+
     }
 
     render() {

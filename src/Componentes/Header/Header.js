@@ -19,26 +19,27 @@ class Header extends Component {
   localStorage.clear()
         };
   
-
-  
-  render(){
-
+   render(){
     return (
       <React.Fragment>
         <nav>
           {this.state.sesion===true ? 
-              <ul className="nav nav-tabs my-4">
-                <li><img className="logo" src="/img/imagen_logo.png" alt="logo" /> </li>
-                <li className="nav-item"><Link className="nav-link"to="/">Home</Link></li>
-                <li className="nav-item"><Link className="nav-link" to="/Favorites">Favorites</Link></li>
-              </ul> 
-              :
-              <ul className="nav nav-tabs my-4">
-                <li><img className="logo" src="/img/imagen_logo.png" alt="logo" /> </li>
-                <li className="nav-item"><Link className="nav-link" to="/">Home</Link></li>
-                <li className="nav-item"><Link className="nav-link" to="/Registro">Registro</Link></li>
-                <li className="nav-item"><Link className="nav-link" to="/Login">Login</Link></li>
-              </ul> 
+            <ul className="nav nav-tabs my-4">
+              <li><img className="logo" src="/img/imagen_logo.png" alt="logo" /> </li>
+              <li className="nav-item"><Link className="nav-link"to="/">Home</Link></li>
+              <li className="nav-item"><Link className="nav-link" to="/Movies">Movies</Link></li>
+              <li className="nav-item"><Link className="nav-link" to="/Series">Series</Link></li>
+              <li className="nav-item"><Link className="nav-link" to="/Favorites">Favorites</Link></li>
+            </ul> 
+            :
+            <ul className="nav nav-tabs my-4">
+              <li><img className="logo" src="/img/imagen_logo.png" alt="logo" /> </li>
+              <li className="nav-item"><Link className="nav-link" to="/">Home</Link></li>
+              <li className="nav-item"><Link className="nav-link" to="/Movies">Movies</Link></li>
+              <li className="nav-item"><Link className="nav-link" to="/Series">Series</Link></li>
+              <li className="nav-item"><Link className="nav-link" to="/Registro">Registro</Link></li>
+              <li className="nav-item"><Link className="nav-link" to="/Login">Login</Link></li>
+            </ul> 
           }
         </nav>
       </React.Fragment>
