@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Card from "../../Componentes/Card/Card";
+import Header from "../../Componentes/Header/Header";
 const apikey = "7aa285e4357da2124c14f7534bfc86a0";
 
 class Movies extends Component {
@@ -34,7 +35,8 @@ class Movies extends Component {
     );
 
     return (
-      <section>
+      <div>
+        <Header/>
         <h1>Películas</h1>
 
         <form>
@@ -57,7 +59,7 @@ class Movies extends Component {
             />
           ))}
         </section>
-      </section>
+      </div>
     );
   }
 }

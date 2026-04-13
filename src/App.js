@@ -9,6 +9,7 @@ import Results from "./Screens/Results/Results";
 import Error from "./Screens/Error/Error";
 import DetallePelicula from "./Screens/detallepeli/detallemovie";
 import DetalleSerie from "./Screens/detalleserie/detalletv"
+import Favorites from "./Screens/Favorites/Favorites";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/detallemovie/:id" component={DetallePelicula} />
         <Route path="/detalletv/:id" component={DetalleSerie} />
         <Route path="/results/:tipo/:nombre" component={Results} />
+        <Route path="/favorites" component={Favorites} />
         <Route component={Error} />
       </Switch>
       <Footer />

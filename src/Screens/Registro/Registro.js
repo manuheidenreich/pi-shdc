@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import Header from "../../Componentes/Header/Header";
 
 class Registro extends Component {
     constructor(props) {
@@ -46,7 +47,7 @@ class Registro extends Component {
         }
 
         let nuevoUsuario = {
-            email: this.state.email.trim().toLowerCase(),
+            email: this.state.email.toLowerCase(),
             password: this.state.password
         };
 
@@ -69,7 +70,8 @@ class Registro extends Component {
 
     render() {
         return (
-            <section>
+            <div>
+                <Header/>
                 <h1>Crear cuenta</h1>
 
                 <form onSubmit={(event) => this.submitForm(event)}>
@@ -95,7 +97,7 @@ class Registro extends Component {
                 </form>
 
                 {this.state.error !== "" ? <p>{this.state.error}</p> : null}
-            </section>
+            </div>
         );
     }
 }

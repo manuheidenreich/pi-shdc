@@ -1,4 +1,6 @@
 import React,{ Component } from "react";
+import Card from "../Card/Card";
+const apikey = "7aa285e4357da2124c14f7534bfc86a0";
 
 class PelisFavoritas extends Component{
     constructor(props){

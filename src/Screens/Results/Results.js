@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Card from "../../Componentes/Card/Card";
+import Header from "../../Componentes/Header/Header";
 
 const apikey = "7aa285e4357da2124c14f7534bfc86a0";
 
@@ -27,6 +28,7 @@ class Results extends Component {
     render() {
         return (
             <div>
+                <Header/>
                 <h1>
                     Resultados de búsqueda para: {this.props.match.params.nombre}
                 </h1>

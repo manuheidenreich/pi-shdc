@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Header from '../../Componentes/Header/Header';
 
 const apikey = "7aa285e4357da2124c14f7534bfc86a0";
 
@@ -33,7 +34,7 @@ class DetallePelicula extends Component {
         }
         return (
             <div>
-
+                <Header/>
                 <h2 className="alert alert-primary">{this.state.pelicula.title}</h2>
                 <section className="row">
                     <img src={"https://image.tmdb.org/t/p/w342/" + this.state.pelicula.poster_path} className="col-md-6" alt={this.state.pelicula.title} />

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Cookies from "universal-cookie";
+import Header from "../../Componentes/Header/Header";
 
 const cookies = new Cookies();
 
@@ -57,7 +58,8 @@ class Login extends Component {
 
     render() {
         return (
-            <section>
+            <div>
+                <Header/>
                 <h1>Login</h1>
 
                 <form onSubmit={(event) => this.submitForm(event)}>
@@ -83,7 +85,7 @@ class Login extends Component {
                 </form>
 
                 {this.state.error ? <p>{this.state.error}</p> : null}
-            </section>
+            </div>
         );
     }
 }

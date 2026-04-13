@@ -1,4 +1,6 @@
 import React,{ Component } from "react";
+import Card from "../Card/Card";
+const apikey = "7aa285e4357da2124c14f7534bfc86a0";
 
 class SeriesFavoritas extends Component{
     constructor(props){
@@ -10,7 +12,7 @@ class SeriesFavoritas extends Component{
     }
 
     componentDidMount(){
-        let arrayfavoritosSerie=JSON.parse(localStorage.getItem("favoritosSeriee"))
+        let arrayfavoritosSerie=JSON.parse(localStorage.getItem("favoritosSerie"))
         if (arrayfavoritosSerie.length===0){
             return
         }
