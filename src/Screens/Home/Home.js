@@ -4,11 +4,13 @@ import SeccionPelisCartelera from "../../Componentes/Seccion_PelisCartelera/Secc
 import SeccionPelisPopulares from "../../Componentes/Seccion_PelisPopulares/SeccionPelisPopulares";
 import SeccionSeriesPopulares from "../../Componentes/Seccion_SeriesPopulares/SeccionSeriesPopulares";
 import SeccionSeriesCartelera from "../../Componentes/Seccion_SeriesCartelera/SeccionSeriesCartelera";
+import Header from "../../Componentes/Header/Header";
 
 class Home extends Component {
     render() {
         return (
             <div>
+                <Header/>
                 <FormBusqueda />
                 <h2 className="alert alert-primary">Películas Populares</h2>
                 <SeccionPelisPopulares />

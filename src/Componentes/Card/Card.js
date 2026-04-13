@@ -1,22 +1,19 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-
+import Cookies from "universal-cookie";
+const cookies = new Cookies();
 class Card extends Component {
     constructor(props) {
         super(props);
         this.state = {
             esFavorito: false,
-            sesion: false
+            cookie: cookies.get('usuario')
         };
     }
 
-    componentDidMount() {
-        let sesionIniciada = sessionStorage.getItem("sesionIniciada");
-        this.setState({
-            sesion:sesionIniciada 
-        });
-    }
-
+ componentDidUpdate(){ 
+        this.setState = {cookie: cookies.get('usuario')}
+ }
     agregarAFavoritos() {
         let arrayfavoritosMovie = JSON.parse(localStorage.getItem("favoritosMovie")) || [];
         let arrayfavoritosSerie = JSON.parse(localStorage.getItem("favoritosSerie")) || [];
@@ -34,9 +31,8 @@ class Card extends Component {
         arrayfavoritosSerie.push(this.props.id);
         localStorage.setItem("favoritosSerie", JSON.stringify(arrayfavoritosSerie));
     }
-
     }
-
+    
     render() {
         return (
             <article className="single-card-movie">
@@ -56,7 +52,7 @@ class Card extends Component {
                     <button className="btn btn-primary">Ir a detalle</button>
                 </Link>
 
-                {this.state.sesion ? (
+                {this.state.cookie!== undefined ? (
                     <button className="btn alert-primary" onClick={() => this.agregarAFavoritos()}>
                         {this.state.esFavorito
                             ? "♥️"

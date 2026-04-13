@@ -13,7 +13,6 @@ import DetalleSerie from "./Screens/detalleserie/detalletv"
 function App() {
   return (
     <div className="app">
-      <Header />
       <Switch>
         <Route path="/" exact={true} component={Home} />
         <Route path="/login" component={Login} />
