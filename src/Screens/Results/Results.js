@@ -45,6 +45,7 @@ class Results extends Component {
                                 id={item.id}
                                 nombre={this.props.match.params.tipo === "movie" ? item.title : item.name}
                                 descripcion={item.overview}
+                                tipo={this.props.match.params.tipo}
                                 imagen={item.poster_path}
                             />
                         ))}
