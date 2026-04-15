@@ -7,32 +7,36 @@ class Card extends Component {
         super(props);
         this.state = {
             esFavorito: false,
+            mostrarDescripcion: false,
             cookie: cookies.get('usuario')
         };
     }
 
- componentDidUpdate(){ 
-        this.setState = {cookie: cookies.get('usuario')}
- }
+    
+    mostrarDescripcion() {
+        this.setState({
+            mostrarDescripcion: !this.state.mostrarDescripcion
+        })
+    };
     agregarAFavoritos() {
         let arrayfavoritosMovie = JSON.parse(localStorage.getItem("favoritosMovie")) || [];
         let arrayfavoritosSerie = JSON.parse(localStorage.getItem("favoritosSerie")) || [];
 
         this.setState({
-        esFavorito: !this.state.esFavorito
-    });
+            esFavorito: !this.state.esFavorito
+        });
 
-    if (this.props.tipo === "movie") {
-        arrayfavoritosMovie.push(this.props.id);
-        localStorage.setItem("favoritosMovie", JSON.stringify(arrayfavoritosMovie));
-    }    
+        if (this.props.tipo === "movie") {
+            arrayfavoritosMovie.push(this.props.id);
+            localStorage.setItem("favoritosMovie", JSON.stringify(arrayfavoritosMovie));
+        }
 
-    if (this.props.tipo === "tv") {
-        arrayfavoritosSerie.push(this.props.id);
-        localStorage.setItem("favoritosSerie", JSON.stringify(arrayfavoritosSerie));
+        if (this.props.tipo === "tv") {
+            arrayfavoritosSerie.push(this.props.id);
+            localStorage.setItem("favoritosSerie", JSON.stringify(arrayfavoritosSerie));
+        }
     }
-    }
-    
+
     render() {
         return (
             <article className="single-card-movie">
@@ -44,21 +48,31 @@ class Card extends Component {
                 <div className="cardBody">
                     <h5 className="card-title">{this.props.nombre}</h5>
 
-                
-                    <p className="card-text">{this.props.descripcion}</p>
-    
 
-                <Link to={`/detalle${this.props.tipo}/${this.props.id}`}>
-                    <button className="btn btn-primary">Ir a detalle</button>
-                </Link>
+                    {this.state.mostrarDescripcion ? (
 
-                {this.state.cookie!== undefined ? (
-                    <button className="btn alert-primary" onClick={() => this.agregarAFavoritos()}>
-                        {this.state.esFavorito
-                            ? "♥️"
-                            : "🩶"}
+                        <p className="card-text">{this.props.descripcion}</p>
+                    ) : null}
+
+                    <button
+                        onClick={() => this.mostrarDescripcion()}
+                        className="btn btn-primary"
+                    >
+                        {this.state.mostrarDescripcion ? "Ver menos" : "Ver descripción"}
                     </button>
-                ) : null}
+
+
+                    <Link to={`/detalle${this.props.tipo}/${this.props.id}`}>
+                        <button className="btn btn-primary">Ir a detalle</button>
+                    </Link>
+
+                    {this.state.cookie !== undefined ? (
+                        <button className="btn alert-primary" onClick={() => this.agregarAFavoritos()}>
+                            {this.state.esFavorito
+                                ? "♥️"
+                                : "🩶"}
+                        </button>
+                    ) : null}
                 </div>
             </article>
         );

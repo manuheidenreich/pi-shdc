@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import Header from '../../Componentes/Header/Header';
-
+import Cookies from "universal-cookie";
 const apikey = "7aa285e4357da2124c14f7534bfc86a0";
-
+const cookies = new Cookies();
 class DetalleSerie extends Component {
     constructor(props) {
         super(props);
         this.state = {
             serie: null,
-            generos: null
+            generos: null,
+            esFavorito: false,
+            cookie: cookies.get('usuario')
         };
     }
 
@@ -22,6 +24,18 @@ class DetalleSerie extends Component {
                 generos: data.genres
             })})
             .catch(error => console.log(error));
+    }
+    agregarAFavoritos() {
+        let arrayfavoritosSerie = JSON.parse(localStorage.getItem("favoritosSerie")) || [];
+
+        this.setState({
+            esFavorito: !this.state.esFavorito
+        });
+
+       
+       {arrayfavoritosSerie.push(this.props.id);
+        localStorage.setItem("favoritosSerie", JSON.stringify(arrayfavoritosSerie));
+        }
     }
 
     render() {
@@ -44,7 +58,14 @@ class DetalleSerie extends Component {
                         <p className='mt-0 mb-0' id='release-date'><strong>Fecha de estreno:</strong> {this.state.serie.release_date}</p>
                         <p className="mt-0 mb-0 " id="length"><strong>Duración:</strong> {this.state.serie.runtime} minutos</p>
                         <p className="mt-0" id="votes"><strong>Puntuación:</strong> {this.state.serie.vote_average}</p>
-                        <p className="mt-0" id="votes"><strong>Genero:</strong>{this.state.generos.map(genero => genero.name).join(" - ")}</p>
+                        <p className="mt-0" id="votes"><strong>Genero: </strong>{this.state.generos.map(genero => genero.name).join(" - ")}</p>
+                           {this.state.cookie !== undefined ? (
+                        <button className="btn alert-primary" onClick={() => this.agregarAFavoritos()}>
+                            {this.state.esFavorito
+                                ? "♥️"
+                                : "🩶"}
+                        </button>
+                    ) : null}
                     </section>
                 </section>
 
