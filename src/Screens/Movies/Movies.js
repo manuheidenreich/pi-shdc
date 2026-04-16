@@ -13,7 +13,7 @@ class Movies extends Component {
   }
 
   componentDidMount() {
-    fetch("https://api.themoviedb.org/3/movie/popular?api_key=" + apikey)
+    fetch("https://api.themoviedb.org/3/movie/top_rated?api_key=" + apikey)
       .then(response => response.json())
       .then(data =>
         this.setState({
@@ -37,9 +37,9 @@ class Movies extends Component {
     return (
       <div>
         <Header/>
-        <h1>Películas</h1>
+        <h1 className="alert alert-warning">Películas Mejores Valoradas</h1>
 
-        <form>
+        <form className="filter-form px-0 mb-3">
           <input
             type="text"
             placeholder="Buscar película..."
@@ -48,7 +48,7 @@ class Movies extends Component {
           />
         </form>
 
-        <section>
+        <div className="row cards all-movies" id="movies">
           {peliculasFiltradas.map((pelicula) => (
             <Card
               key={pelicula.id}
@@ -58,7 +58,7 @@ class Movies extends Component {
               descripcion={pelicula.overview}
             />
           ))}
-        </section>
+        </div>
       </div>
     );
   }

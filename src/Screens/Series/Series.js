@@ -13,7 +13,7 @@ class Series extends Component {
   }
 
   componentDidMount() {
-    fetch("https://api.themoviedb.org/3/tv/popular?api_key=" + apikey)
+    fetch("https://api.themoviedb.org/3/tv/top_rated?api_key=" + apikey)
       .then(response => response.json())
       .then(data =>
         this.setState({
@@ -37,9 +37,9 @@ class Series extends Component {
     return (
       <div>
         <Header/>
-        <h1>Series</h1>
+        <h1 className="alert alert-warning">Series Mejor Valoradas </h1>
 
-        <form>
+        <form className="filter-form px-0 mb-3">
           <input
             type="text"
             placeholder="Buscar serie..."
@@ -48,7 +48,7 @@ class Series extends Component {
           />
         </form>
 
-        <section>
+        <div className="row cards all-movies" id="movies">
           {seriesFiltradas.map((serie) => (
             <Card
               key={serie.id}
@@ -58,7 +58,7 @@ class Series extends Component {
               descripcion={serie.overview}
             />
           ))}
-        </section>
+        </div>
       </div>
     );
   }

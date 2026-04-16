@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Cookies from "universal-cookie";
 import Header from "../../Componentes/Header/Header";
+import { Link } from "react-router-dom";
 
 const cookies = new Cookies();
 
@@ -62,29 +63,35 @@ class Login extends Component {
                 <Header/>
                 <h1>Login</h1>
 
-                <form onSubmit={(event) => this.submitForm(event)}>
-                    <label htmlFor="email">Email</label>
-                    <input
-                        id="email"
-                        type="email"
-                        name="email"
-                        value={this.state.email}
-                        onChange={(event) => this.controlarInputs(event)}
-                    />
-
-                    <label htmlFor="password">Password</label>
-                    <input
-                        id="password"
-                        type="password"
-                        name="password"
-                        value={this.state.password}
-                        onChange={(event) => this.controlarInputs(event)}
-                    />
-
-                    <button type="submit">Ingresar</button>
-                </form>
-
-                {this.state.error ? <p>{this.state.error}</p> : null}
+                <div className="row justify-content-center">
+                    <div className="col-md-6">
+                        <form onSubmit={(event) => this.submitForm(event)}>
+                            <div className="form-group">
+                                <label htmlFor="email">Email</label>
+                                <input
+                                    id="email"
+                                    type="email"
+                                    name="email"
+                                    value={this.state.email}
+                                    onChange={(event) => this.controlarInputs(event)}
+                                />
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="password">Password</label>
+                                <input
+                                    id="password"
+                                    type="password"
+                                    name="password"
+                                    value={this.state.password}
+                                    onChange={(event) => this.controlarInputs(event)}
+                                />
+                            </div>
+                            <button className="btn btn-primary btn-block" type="submit">Ingresar</button>
+                        </form>
+                        {this.state.error ? <p>{this.state.error}</p> : null}
+                        <p className="mt-3 text-center">¿No tenés cuenta?   <Link to="/registro">Registrarse</Link></p>
+                    </div>
+                </div>
             </div>
         );
     }
