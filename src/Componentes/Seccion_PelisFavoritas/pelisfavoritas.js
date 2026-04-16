@@ -6,23 +6,29 @@ class PelisFavoritas extends Component{
     constructor(props){
         super(props)
         this.state={
-            peliculas : null,
-            favoritosMovie : [],
+            peliculas : [],
+            pelisfavoritas : [],
         }
     }
-
+    
     componentDidMount(){
-        let arrayfavoritosMovie=JSON.parse(localStorage.getItem("favoritosMovie"))
-        if (arrayfavoritosMovie.length===0){
+        let arraypelisfavoritas = JSON.parse(localStorage.getItem("favoritosMovie")) || []
+        this.setState({
+            pelisfavoritas: arraypelisfavoritas
+        })
+        if (arraypelisfavoritas.length===0){
             return
         }
         else{
-            arrayfavoritosMovie.map((id)=>{
+            this.state.pelisfavoritas.map((id)=>{
                 fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${apikey}`)
                     .then((response) => response.json())
                     .then((data) => {
+                        let pelis = this.state.peliculas
+                        pelis.push(data)
+
                         this.setState({
-                        peliculas : this.state.peliculas.push(data.results)
+                            peliculas : pelis
                         });
                     })
                     .catch((error) => console.log(error));
@@ -32,7 +38,7 @@ class PelisFavoritas extends Component{
     }
 
     render() {
-        if (this.state.favoritosMovie.length===0) {
+        if (this.state.pelisfavoritas.length===0) {
             return (
                 <div>
                     <img src="./img/cargando.gif" alt="Cargando..."></img>

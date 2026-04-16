@@ -10,6 +10,8 @@ import Error from "./Screens/Error/Error";
 import DetallePelicula from "./Screens/detallepeli/detallemovie";
 import DetalleSerie from "./Screens/detalleserie/detalletv"
 import Favorites from "./Screens/Favorites/Favorites";
+import Movies from "./Screens/Movies/Movies";
+import Series from "./Screens/Series/Series";
 
 function App() {
   return (
@@ -18,10 +20,12 @@ function App() {
         <Route path="/" exact={true} component={Home} />
         <Route path="/login" component={Login} />
         <Route path="/registro" component={Registro} />
-        <Route path="/detallemovie/:id" component={DetallePelicula} />
-        <Route path="/detalletv/:id" component={DetalleSerie} />
+        <Route path="/detalle/movie/:id" component={DetallePelicula} />
+        <Route path="/detalle/tv/:id" component={DetalleSerie} />
         <Route path="/results/:tipo/:nombre" component={Results} />
         <Route path="/favorites" component={Favorites} />
+        <Route path="/movies" component={Movies} />
+        <Route path="/series" component={Series} />
         <Route component={Error} />
       </Switch>
       <Footer />

@@ -49,9 +49,9 @@ class Movies extends Component {
         </form>
 
         <section>
-          {peliculasFiltradas.map((pelicula, idx) => (
+          {peliculasFiltradas.map((pelicula) => (
             <Card
-              key={pelicula.id || idx}
+              key={pelicula.id}
               id={pelicula.id}
               nombre={pelicula.title}
               imagen={pelicula.poster_path}

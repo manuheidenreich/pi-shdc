@@ -56,7 +56,7 @@ class DetalleSerie extends Component {
                         <h3>Sinópsis</h3>
                         <p className="description">{this.state.serie.overview}</p>
                         <p className='mt-0 mb-0' id='release-date'><strong>Fecha de estreno:</strong> {this.state.serie.release_date}</p>
-                        <p className="mt-0 mb-0 " id="length"><strong>Duración:</strong> {this.state.serie.runtime} minutos</p>
+                        <p className="mt-0 mb-0 " id="length"><strong>Duración:</strong> {this.state.serie.number_of_seasons} temporadas</p>
                         <p className="mt-0" id="votes"><strong>Puntuación:</strong> {this.state.serie.vote_average}</p>
                         <p className="mt-0" id="votes"><strong>Genero: </strong>{this.state.generos.map(genero => genero.name).join(" - ")}</p>
                            {this.state.cookie !== undefined ? (

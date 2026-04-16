@@ -43,9 +43,10 @@ class SeriesFavoritas extends Component{
             <div className="cards">
                 {this.state.series.map((serie) => (
                     <Card
+                        history={this.props.history}
                         key={serie.id}
                         id={serie.id}
-                        nombre={serie.title}
+                        nombre={serie.name}
                         imagen={serie.poster_path}
                         descripcion={serie.overview}
                         tipo="movie"

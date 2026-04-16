@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Cookies from "universal-cookie";
+import { withRouter } from 'react-router-dom';
 const cookies = new Cookies();
+
 class Card extends Component {
     constructor(props) {
         super(props);
@@ -12,29 +14,33 @@ class Card extends Component {
         };
     }
 
-    
     mostrarDescripcion() {
         this.setState({
             mostrarDescripcion: !this.state.mostrarDescripcion
         })
     };
+
     agregarAFavoritos() {
-        let arrayfavoritosMovie = JSON.parse(localStorage.getItem("favoritosMovie")) || [];
-        let arrayfavoritosSerie = JSON.parse(localStorage.getItem("favoritosSerie")) || [];
+        let arraypelisfavoritas = JSON.parse(localStorage.getItem("favoritosMovie")) || [];
+        let arrayseriesfavoritas = JSON.parse(localStorage.getItem("favoritosSerie")) || [];
 
         this.setState({
             esFavorito: !this.state.esFavorito
         });
 
         if (this.props.tipo === "movie") {
-            arrayfavoritosMovie.push(this.props.id);
-            localStorage.setItem("favoritosMovie", JSON.stringify(arrayfavoritosMovie));
+            arraypelisfavoritas.push(this.props.id);
+            localStorage.setItem("favoritosMovie", JSON.stringify(arraypelisfavoritas));
         }
 
         if (this.props.tipo === "tv") {
-            arrayfavoritosSerie.push(this.props.id);
-            localStorage.setItem("favoritosSerie", JSON.stringify(arrayfavoritosSerie));
+            arrayseriesfavoritas.push(this.props.id);
+            localStorage.setItem("favoritosSerie", JSON.stringify(arrayseriesfavoritas));
         }
+    }
+
+    irADetalle(){
+        this.props.history.push(`/detalle/${this.props.tipo}/${this.props.id}`)
     }
 
     render() {
@@ -61,10 +67,7 @@ class Card extends Component {
                         {this.state.mostrarDescripcion ? "Ver menos" : "Ver descripción"}
                     </button>
 
-
-                    <Link to={`/detalle${this.props.tipo}/${this.props.id}`}>
-                        <button className="btn btn-primary">Ir a detalle</button>
-                    </Link>
+                    < button onClick={()=>this.irADetalle()} className="btn btn-primary">Ir a Detalle</button>
 
                     {this.state.cookie !== undefined ? (
                         <button className="btn alert-primary" onClick={() => this.agregarAFavoritos()}>
@@ -79,4 +82,4 @@ class Card extends Component {
     }
 }
 
-export default Card;
+export default withRouter(Card);

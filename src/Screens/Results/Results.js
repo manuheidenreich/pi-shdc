@@ -41,6 +41,7 @@ class Results extends Component {
                     <section className="cards">
                         {this.state.resultados.map((item) => (
                             <Card
+                                history={this.props.history}
                                 key={item.id}
                                 id={item.id}
                                 nombre={this.props.match.params.tipo === "movie" ? item.title : item.name}

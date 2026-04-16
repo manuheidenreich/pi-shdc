@@ -27,6 +27,7 @@ class SeccionSeriesPopulares extends Component {
             <div className="row cards" id="tv">
                 {this.state.series.map((serie) => (
                     <Card
+                        history={this.props.history}
                         key={serie.id}
                         id={serie.id}
                         nombre={serie.name}

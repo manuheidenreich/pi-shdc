@@ -27,6 +27,7 @@ class SeccionPelisPopulares extends Component {
             <div className="row cards" id="movies">
                 {this.state.peliculas.map((pelicula) => (
                     <Card
+                        history={this.props.history}
                         key={pelicula.id}
                         id={pelicula.id}
                         nombre={pelicula.title}
