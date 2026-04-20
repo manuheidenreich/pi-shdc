@@ -22,10 +22,12 @@ class PelisFavoritas extends Component {
             return
         }
         else {
+            // Variable vacia para acumular
             arraypelisfavoritas.map((id) => {
                 fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${apikey}`)
                     .then((response) => response.json())
                     .then((data) => {
+                        
                         this.setState({
                             peliculas: [...this.state.peliculas, data]
                         });

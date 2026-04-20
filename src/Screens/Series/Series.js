@@ -8,7 +8,8 @@ class Series extends Component {
     super(props);
     this.state = {
       series: [],
-      busqueda: ""
+      busqueda: "",
+      cantidadMostrada: 4,
     };
   }
 
@@ -26,6 +27,12 @@ class Series extends Component {
   controlarBusqueda(event) {
     this.setState({
       busqueda: event.target.value
+    });
+  }
+
+  cargarMas() {
+    this.setState({
+      cantidadMostrada: this.state.cantidadMostrada + 4,
     });
   }
 
@@ -48,8 +55,16 @@ class Series extends Component {
           />
         </form>
 
-        <div className="row cards all-movies" id="movies">
-          {seriesFiltradas.map((serie) => (
+         {this.state.cantidadMostrada < this.state.series.length ? (
+          <button onClick={() => this.cargarMas()} className="btn btn-success mb-4">
+            Cargar Más
+          </button>
+        ) : null}
+
+
+        <section className="row cards all-movies" id="movies">
+          {this.state.series.length > 0 ? (
+            this.state.series.slice(0, this.state.cantidadMostrada).map((serie, idx) => (
             <Card
               key={serie.id}
               id={serie.id}
@@ -58,11 +73,19 @@ class Series extends Component {
               descripcion={serie.overview}
               tipo="tv"
             />
-          ))}
-        </div>
+         ))
+            ): (
+                            <p>No se encontraron series.</p>
+                        )}
+          </section>
+            
+          
+        
+
       </div>
     );
   }
 }
+
 
 export default Series;

@@ -61,7 +61,7 @@ class Login extends Component {
         return (
             <div>
                 <Header/>
-                <h1>Login</h1>
+                <h1  className="alert alert-primary">Login</h1>
 
                 <div className="row justify-content-center">
                     <div className="col-md-6">

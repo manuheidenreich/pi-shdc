@@ -6,7 +6,7 @@ class FormBusqueda extends Component {
         super(props);
         this.state = {
             valor: "",
-            tipo: ""
+            tipo: "movie"
         };
     }
 
