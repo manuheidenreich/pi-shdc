@@ -36,8 +36,8 @@ class Series extends Component {
 
     return (
       <div>
-        <Header/>
-        <h1 className="alert alert-warning">Series Mejor Valoradas </h1>
+        <Header />
+        <h1 className="alert alert-warning">Series Mejor Valoradas</h1>
 
         <form className="filter-form px-0 mb-3">
           <input
@@ -56,6 +56,7 @@ class Series extends Component {
               nombre={serie.name}
               imagen={serie.poster_path}
               descripcion={serie.overview}
+              tipo="tv"
             />
           ))}
         </div>

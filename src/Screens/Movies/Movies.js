@@ -36,7 +36,7 @@ class Movies extends Component {
 
     return (
       <div>
-        <Header/>
+        <Header />
         <h1 className="alert alert-warning">Películas Mejores Valoradas</h1>
 
         <form className="filter-form px-0 mb-3">
@@ -56,6 +56,7 @@ class Movies extends Component {
               nombre={pelicula.title}
               imagen={pelicula.poster_path}
               descripcion={pelicula.overview}
+              tipo="movie"
             />
           ))}
         </div>

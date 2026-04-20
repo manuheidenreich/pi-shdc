@@ -6,30 +6,26 @@ class FormBusqueda extends Component {
         super(props);
         this.state = {
             valor: "",
-            tipo: "movie"
+            tipo: ""
         };
     }
 
     controlarCambios(e) {
         this.setState({
-            [e.target.name]: e.target.value
+            valor: e.target.value
         });
     }
 
-    elegirSerie(e){
-        e.preventDefault();
-        this.setState({tipo:"tv"})
+    cambiarTipo(e) {
+        this.setState({
+            tipo: e.target.value
+        });
     }
 
-    elegirPelicula(e){
-        e.preventDefault();    
-        this.setState({tipo:"movie"})
-        }
-
     ejecutarBusqueda(e) {
-        e.preventDefault();
+        e.preventDefault(); 
 
-        if (this.state.valor=== "") {
+        if (this.state.valor === "") {
             return;
         }
 
@@ -38,31 +34,44 @@ class FormBusqueda extends Component {
 
     render() {
         return (
-            <div >
+            <div>
                 <form className="search-form" onSubmit={(e) => this.ejecutarBusqueda(e)}>
                     <section className="search-form-left">
+
                         <input
-                        type="text"
-                        name="valor"
-                        onChange={(e) => this.controlarCambios(e)}
-                        value={this.state.valor}
-                        placeholder="Buscar..."
-                        >
-                        </input>
+                            type="text"
+                            name="valor"
+                            onChange={(e) => this.controlarCambios(e)}
+                            value={this.state.valor}
+                            placeholder="Buscar..."
+                        />
+
                         <section className="search-form-radio-container">
-                            <label for="serie">Series</label>
+
+                            <label>Series</label>
                             <input
-                                name="serie"
-                                onClick={(e)=>this.elegirSerie(e)}
-                                className="search-form-radio" type="radio"/>
-                            <label for="peli">Películas</label>
+                                type="radio"
+                                name="tipo"
+                                value="tv"
+                                checked={this.state.tipo === "tv"}
+                                onChange={(e) => this.cambiarTipo(e)}
+                            />
+
+                            <label>Películas</label>
                             <input
-                                name="peli"
-                                onClick={(e)=>this.elegirPelicula(e)}
-                                className="search-form-radio" type="radio"/>
+                                type="radio"
+                                name="tipo"
+                                value="movie"
+                                checked={this.state.tipo === "movie"}
+                                onChange={(e) => this.cambiarTipo(e)}
+                            />
+
                         </section>
                     </section>
-                    <button className="btn btn-success btn-sm" type="submit">Buscar</button>
+
+                    <button className="btn btn-success btn-sm" type="submit">
+                        Buscar
+                    </button>
                 </form>
             </div>
         );
