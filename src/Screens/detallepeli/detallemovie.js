@@ -17,29 +17,42 @@ class DetallePelicula extends Component {
     }
 
     componentDidMount() {
+        let arraypelisfavoritas = JSON.parse(localStorage.getItem("favoritosMovie")) || [];
+       if (arraypelisfavoritas.includes(Number(this.props.match.params.id))) {
+            this.setState({
+                esFavorito: true
+            });
+        }
         fetch(`https://api.themoviedb.org/3/movie/${this.props.match.params.id}?api_key=${apikey}`)
             .then(response => response.json())
             .then(data => {
                 console.log(data);
                 this.setState({
                 pelicula: data,
-                generos: data.genres
+                generos: data.genres,
             })})
             .catch(error => console.log(error));
+
+            
     }
 
      agregarAFavoritos() {
-        let arrayfavoritosMovie = JSON.parse(localStorage.getItem("favoritosMovie")) || [];
+        let arraypelisfavoritas = JSON.parse(localStorage.getItem("favoritosMovie")) || [];
         
-        this.setState({
-            esFavorito: !this.state.esFavorito
-        });
-
-            {arrayfavoritosMovie.push(this.props.id);
-            localStorage.setItem("favoritosMovie", JSON.stringify(arrayfavoritosMovie));
+        if (arraypelisfavoritas.includes(Number(this.props.match.params.id))) {
+                let nuevoArray = arraypelisfavoritas.filter((id) => id !== this.props.match.params.id);
+                localStorage.setItem("favoritosMovie", JSON.stringify(nuevoArray));
+                this.setState({
+                    esFavorito: false
+                });
+            } else {
+                arraypelisfavoritas.push(this.props.match.params.id);
+                localStorage.setItem("favoritosMovie", JSON.stringify(arraypelisfavoritas));
+                this.setState({
+                    esFavorito: true
+                });
+            }
         }
-
-    }
     render() {
         if (this.state.pelicula === null) {
             return (
@@ -61,11 +74,9 @@ class DetallePelicula extends Component {
                         <p className="mt-0 mb-0 " id="length"><strong>Duración:</strong> {this.state.pelicula.runtime} minutos</p>
                         <p className="mt-0" id="votes"><strong>Puntuación:</strong> {this.state.pelicula.vote_average}</p>
                         <p className="mt-0" id="votes"><strong>Genero: </strong>{this.state.generos.map(genero => genero.name).join(" - ")}</p>
-                         {this.state.cookie !== undefined ? (
+                        {this.state.cookie !== undefined ? (
                         <button className="btn alert-primary" onClick={() => this.agregarAFavoritos()}>
-                            {this.state.esFavorito
-                                ? "♥️"
-                                : "🩶"}
+                            {this.state.esFavorito ? "♥️" : "🩶"}
                         </button>
                     ) : null}
                     </section>
