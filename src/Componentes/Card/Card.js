@@ -13,33 +13,68 @@ class Card extends Component {
         };
     }
 
+    componentDidMount() {
+        let arraypelisfavoritas = JSON.parse(localStorage.getItem("favoritosMovie")) || [];
+        let arrayseriesfavoritas = JSON.parse(localStorage.getItem("favoritosSerie")) || [];
+
+        if (this.props.tipo === "movie" && arraypelisfavoritas.includes(this.props.id)) {
+            this.setState({
+                esFavorito: true
+            });
+        }
+
+        if (this.props.tipo === "tv" && arrayseriesfavoritas.includes(this.props.id)) {
+            this.setState({
+                esFavorito: true
+            });
+        }
+    }
+
     mostrarDescripcion() {
         this.setState({
             mostrarDescripcion: !this.state.mostrarDescripcion
-        })
-    };
+        });
+    }
 
     agregarAFavoritos() {
         let arraypelisfavoritas = JSON.parse(localStorage.getItem("favoritosMovie")) || [];
         let arrayseriesfavoritas = JSON.parse(localStorage.getItem("favoritosSerie")) || [];
 
-        this.setState({
-            esFavorito: !this.state.esFavorito
-        });
-
         if (this.props.tipo === "movie") {
-            arraypelisfavoritas.push(this.props.id);
-            localStorage.setItem("favoritosMovie", JSON.stringify(arraypelisfavoritas));
+            if (arraypelisfavoritas.includes(this.props.id)) {
+                let nuevoArray = arraypelisfavoritas.filter((id) => id !== this.props.id);
+                localStorage.setItem("favoritosMovie", JSON.stringify(nuevoArray));
+                this.setState({
+                    esFavorito: false
+                });
+            } else {
+                arraypelisfavoritas.push(this.props.id);
+                localStorage.setItem("favoritosMovie", JSON.stringify(arraypelisfavoritas));
+                this.setState({
+                    esFavorito: true
+                });
+            }
         }
 
         if (this.props.tipo === "tv") {
-            arrayseriesfavoritas.push(this.props.id);
-            localStorage.setItem("favoritosSerie", JSON.stringify(arrayseriesfavoritas));
+            if (arrayseriesfavoritas.includes(this.props.id)) {
+                let nuevoArray = arrayseriesfavoritas.filter((id) => id !== this.props.id);
+                localStorage.setItem("favoritosSerie", JSON.stringify(nuevoArray));
+                this.setState({
+                    esFavorito: false
+                });
+            } else {
+                arrayseriesfavoritas.push(this.props.id);
+                localStorage.setItem("favoritosSerie", JSON.stringify(arrayseriesfavoritas));
+                this.setState({
+                    esFavorito: true
+                });
+            }
         }
     }
 
-    irADetalle(){
-        this.props.history.push(`/detalle/${this.props.tipo}/${this.props.id}`)
+    irADetalle() {
+        this.props.history.push(`/detalle/${this.props.tipo}/${this.props.id}`);
     }
 
     render() {
@@ -53,9 +88,7 @@ class Card extends Component {
                 <div className="cardBody">
                     <h5 className="card-title">{this.props.nombre}</h5>
 
-
                     {this.state.mostrarDescripcion ? (
-
                         <p className="card-text">{this.props.descripcion}</p>
                     ) : null}
 
@@ -66,13 +99,13 @@ class Card extends Component {
                         {this.state.mostrarDescripcion ? "Ver menos" : "Ver descripción"}
                     </button>
 
-                    < button onClick={()=>this.irADetalle()} className="btn btn-primary">Ir a Detalle</button>
+                    <button onClick={() => this.irADetalle()} className="btn btn-primary">
+                        Ir a Detalle
+                    </button>
 
                     {this.state.cookie !== undefined ? (
                         <button className="btn alert-primary" onClick={() => this.agregarAFavoritos()}>
-                            {this.state.esFavorito
-                                ? "♥️"
-                                : "🩶"}
+                            {this.state.esFavorito ? "♥️" : "🩶"}
                         </button>
                     ) : null}
                 </div>

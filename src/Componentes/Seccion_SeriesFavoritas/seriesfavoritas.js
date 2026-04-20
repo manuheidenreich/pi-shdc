@@ -1,44 +1,56 @@
-import React,{ Component } from "react";
+import React, { Component } from "react";
 import Card from "../Card/Card";
 const apikey = "7aa285e4357da2124c14f7534bfc86a0";
 
-class SeriesFavoritas extends Component{
-    constructor(props){
+class SeriesFavoritas extends Component {
+    constructor(props) {
         super(props)
-        this.state={
-            series : null,
-            favoritosSerie : [],
+        this.state = {
+            series: [],
+            favoritosSerie: []
         }
     }
 
-    componentDidMount(){
-        let arrayfavoritosSerie=JSON.parse(localStorage.getItem("favoritosSerie"))
-        if (arrayfavoritosSerie.length===0){
-            return
+    componentDidMount() {
+        let arrayfavoritosSerie = JSON.parse(localStorage.getItem("favoritosSerie")) || [];
+
+        this.setState({
+            favoritosSerie: arrayfavoritosSerie
+        });
+
+        if (arrayfavoritosSerie.length === 0) {
+            return;
         }
-        else{
-            arrayfavoritosSerie.map((id)=>{
-                fetch(`https://api.themoviedb.org/3/tv/${id}?api_key=${apikey}`)
-                    .then((response) => response.json())
-                    .then((data) => {
-                        this.setState({
-                        series : this.state.series.push(data.results)
-                        });
-                    })
-                    .catch((error) => console.log(error));
+
+        arrayfavoritosSerie.map((id) => {
+            fetch(`https://api.themoviedb.org/3/tv/${id}?api_key=${apikey}`)
+                .then((response) => response.json())
+                .then((data) => {
+                    this.setState({
+                        series: [...this.state.series, data]
+                    });
                 })
-        }
-            
+                .catch((error) => console.log(error));
+        });
     }
 
     render() {
-        if (this.state.favoritosSerie.length===0) {
+        if (this.state.favoritosSerie.length === 0) {
             return (
                 <div>
-                    <img src="./img/cargando.gif" alt="Cargando..."></img>
+                    <h2>No tenés series favoritas</h2>
                 </div>
-            )
+            );
         }
+
+        if (this.state.series.length === 0) {
+            return (
+                <div>
+                    <img src="./img/cargando.gif" alt="Cargando..." />
+                </div>
+            );
+        }
+
         return (
             <div className="cards">
                 {this.state.series.map((serie) => (
@@ -49,12 +61,11 @@ class SeriesFavoritas extends Component{
                         nombre={serie.name}
                         imagen={serie.poster_path}
                         descripcion={serie.overview}
-                        tipo="movie"
+                        tipo="tv"
                     />
                 ))}
             </div>
-
-        )
+        );
     }
 }
 
