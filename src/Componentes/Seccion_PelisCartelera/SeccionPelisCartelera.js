@@ -25,7 +25,7 @@ class SeccionPelisCartelera extends Component {
     render() {
         return (
             <div className="cards">
-                {this.state.peliculas.map((pelicula) => (
+                 {this.state.peliculas.slice(0,4).map((pelicula) => (
                     <Card
                         key={pelicula.id}
                         id={pelicula.id}

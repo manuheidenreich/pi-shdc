@@ -25,7 +25,7 @@ class SeccionSeriesCartelera extends Component {
     render() {
         return (
             <div className="cards">
-                {this.state.series.map((serie) => (
+                {this.state.series.slice(0,4).map((serie) => (
                     <Card
                         history={this.props.history}
                         key={serie.id}
