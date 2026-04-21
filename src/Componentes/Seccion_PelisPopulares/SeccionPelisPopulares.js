@@ -25,7 +25,7 @@ class SeccionPelisPopulares extends Component {
     render() {
         return (
             <div className="row cards" id="movies">
-                 {this.state.peliculas.slice(4,8).map((pelicula) => (
+                 {this.state.peliculas.slice(6,10).map((pelicula) => (
                     <Card
                         history={this.props.history}
                         key={pelicula.id}
