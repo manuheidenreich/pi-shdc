@@ -125,3 +125,69 @@ Footer{
         grid-template-columns: 1fr;
     }
 }
+
+@media (max-width: 1024px) {
+    .single-card-movie,
+    .single-card-tv,
+    .single-card-people {
+        width: 31%;
+    }
+
+    .single-card-playing,
+    .single-card-on-air,
+    .all-movies .single-card-movie {
+        width: 31%;
+    }
+}
+
+/* CELULAR */
+@media (max-width: 768px) {
+    .nav {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .search-form {
+        grid-template-columns: 1fr;
+        row-gap: 10px;
+    }
+
+    .filter-form {
+        grid-template-columns: 1fr;
+    }
+
+    .cards {
+        justify-content: center;
+        padding: 0.5rem;
+    }
+
+    .single-card-movie,
+    .single-card-tv,
+    .single-card-playing,
+    .single-card-on-air,
+    .single-card-people,
+    .all-movies .single-card-movie {
+        width: 48%;
+    }
+}
+
+/* CELULAR CHICO */
+@media (max-width: 480px) {
+    .single-card-movie,
+    .single-card-tv,
+    .single-card-playing,
+    .single-card-on-air,
+    .single-card-people,
+    .all-movies .single-card-movie {
+        width: 100%;
+    }
+
+    .search-form input,
+    .filter-form input {
+        font-size: 0.95rem;
+    }
+
+    .logo {
+        max-width: 100px;
+    }
+}
