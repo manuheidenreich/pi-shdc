@@ -14,11 +14,12 @@ class Movies extends Component {
   }
 
   componentDidMount() {         
-    fetch(`https://api.themoviedb.org/3/movie/top_rated?api_key=${apikey}&?page=1`)
+    fetch(`https://api.themoviedb.org/3/movie/top_rated?api_key=${apikey}&page=1`)
       .then(response => response.json())
       .then(data =>
         this.setState({
-          peliculas: data.results
+          peliculas: data.results,
+          pagina: this.state.pagina + 1
         })
       )
       .catch(error => console.log(error));
@@ -32,14 +33,17 @@ class Movies extends Component {
   }
 
   cargarMas() {
-    let nueva_pagina = this.state.pagina + 1
-    fetch(`https://api.themoviedb.org/3/movie/top_rated?api_key=${apikey}&?page=${nueva_pagina}`)
+    console.log(this.state.pagina);
+    
+    fetch(`https://api.themoviedb.org/3/movie/top_rated?api_key=${apikey}&page=${this.state.pagina}`)
      .then(response => response.json())
-      .then(data =>
+      .then(data =>{
+        console.log(data.results);
+        
         this.setState({
           peliculas:this.state.peliculas.concat(data.results),
-          pagina:nueva_pagina
-        })
+         pagina: this.state.pagina + 1
+        })}
       )
       .catch(error => console.log(error));
     
@@ -71,7 +75,7 @@ class Movies extends Component {
 
         <section className="row cards all-movies" id="movies">
           {this.state.peliculas.length > 0 ? (
-            this.state.peliculas.slice(0, this.state.cantidadMostrada).map((pelicula, idx) => (
+            peliculasFiltradas.map((pelicula) => (
               <Card
                 key={pelicula.id}
                 id={pelicula.id}

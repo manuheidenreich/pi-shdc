@@ -25,7 +25,7 @@ class SeccionSeriesPopulares extends Component {
     render() {
         return (
             <div className="row cards" id="tv">
-                {this.state.series.map((serie) => (
+                {this.state.series.slice(0,4).map((serie) => (
                     <Card
                         history={this.props.history}
                         key={serie.id}

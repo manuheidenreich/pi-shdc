@@ -14,7 +14,7 @@ class Series extends Component {
   }
 
   componentDidMount() {         
-    fetch(`https://api.themoviedb.org/3/tv/top_rated?api_key=${apikey}&?page=1`)
+    fetch(`https://api.themoviedb.org/3/tv/top_rated?api_key=${apikey}&page=1`)
       .then(response => response.json())
       .then(data =>
         this.setState({
@@ -33,7 +33,7 @@ class Series extends Component {
 
   cargarMas() {
     let nueva_pagina = this.state.pagina + 1
-    fetch(`https://api.themoviedb.org/3/tv/top_rated?api_key=${apikey}&?page=${nueva_pagina}`)
+    fetch(`https://api.themoviedb.org/3/tv/top_rated?api_key=${apikey}&page=${nueva_pagina}`)
      .then(response => response.json())
       .then(data =>
         this.setState({
@@ -72,12 +72,12 @@ class Series extends Component {
           </button>
 
         <section className="row cards all-movies" id="movies">
-          {this.state.series.length > 0 ? (
-            this.state.series.slice(0, this.state.cantidadMostrada).map((serie) => (
+           {this.state.series.length > 0 ? (
+            seriesFiltradas.map((serie) => (
               <Card
                 key={serie.id}
                 id={serie.id}
-                nombre={serie.title}
+                nombre={serie.name}
                 imagen={serie.poster_path}
                 descripcion={serie.overview}
                 tipo="tv"
