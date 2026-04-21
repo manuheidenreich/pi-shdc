@@ -9,13 +9,12 @@ class Movies extends Component {
     this.state = {
       peliculas: [],
       busqueda: "",
-      cantidadMostrada: 4,
+      pagina: 1
     };
   }
 
-  componentDidMount() {
-    // mostramos las 20 pelis
-    fetch("https://api.themoviedb.org/3/movie/top_rated?api_key=" + apikey)
+  componentDidMount() {         
+    fetch(`https://api.themoviedb.org/3/movie/top_rated?api_key=${apikey}&?page=1`)
       .then(response => response.json())
       .then(data =>
         this.setState({
@@ -33,11 +32,16 @@ class Movies extends Component {
   }
 
   cargarMas() {
-    // fetch que carga la pagina siguiente,
-    this.setState({
-      cantidadMostrada: this.state.cantidadMostrada + 4,
-    });
-
+    let nueva_pagina = this.state.pagina + 1
+    fetch(`https://api.themoviedb.org/3/movie/top_rated?api_key=${apikey}&?page=${nueva_pagina}`)
+     .then(response => response.json())
+      .then(data =>
+        this.setState({
+          peliculas:this.state.peliculas.concat(data.results),
+          pagina:nueva_pagina
+        })
+      )
+      .catch(error => console.log(error));
     
   }
 
@@ -60,11 +64,10 @@ class Movies extends Component {
           />
         </form>
 
-        {this.state.cantidadMostrada < this.state.peliculas.length ? (
+      
           <button onClick={() => this.cargarMas()} className="btn btn-success mb-4">
             Cargar Más
           </button>
-        ) : null}
 
         <section className="row cards all-movies" id="movies">
           {this.state.peliculas.length > 0 ? (

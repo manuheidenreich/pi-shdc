@@ -9,12 +9,12 @@ class Series extends Component {
     this.state = {
       series: [],
       busqueda: "",
-      cantidadMostrada: 4,
+      pagina: 1
     };
   }
 
-  componentDidMount() {
-    fetch("https://api.themoviedb.org/3/tv/top_rated?api_key=" + apikey)
+  componentDidMount() {         
+    fetch(`https://api.themoviedb.org/3/tv/top_rated?api_key=${apikey}&?page=1`)
       .then(response => response.json())
       .then(data =>
         this.setState({
@@ -22,6 +22,7 @@ class Series extends Component {
         })
       )
       .catch(error => console.log(error));
+
   }
 
   controlarBusqueda(event) {
@@ -31,9 +32,17 @@ class Series extends Component {
   }
 
   cargarMas() {
-    this.setState({
-      cantidadMostrada: this.state.cantidadMostrada + 4,
-    });
+    let nueva_pagina = this.state.pagina + 1
+    fetch(`https://api.themoviedb.org/3/tv/top_rated?api_key=${apikey}&?page=${nueva_pagina}`)
+     .then(response => response.json())
+      .then(data =>
+        this.setState({
+          series:this.state.series.concat(data.results),
+          pagina:nueva_pagina
+        })
+      )
+      .catch(error => console.log(error));
+    
   }
 
   render() {
@@ -49,31 +58,31 @@ class Series extends Component {
         <form className="filter-form px-0 mb-3">
           <input
             type="text"
-            placeholder="Buscar serie..."
+            placeholder="Buscar series..."
             value={this.state.busqueda}
             onChange={(event) => this.controlarBusqueda(event)}
+          
+      
           />
         </form>
 
-         {this.state.cantidadMostrada < this.state.series.length ? (
+      
           <button onClick={() => this.cargarMas()} className="btn btn-success mb-4">
             Cargar Más
           </button>
-        ) : null}
-
 
         <section className="row cards all-movies" id="movies">
           {this.state.series.length > 0 ? (
-            this.state.series.slice(0, this.state.cantidadMostrada).map((serie, idx) => (
-            <Card
-              key={serie.id}
-              id={serie.id}
-              nombre={serie.name}
-              imagen={serie.poster_path}
-              descripcion={serie.overview}
-              tipo="tv"
-            />
-         ))
+            this.state.series.slice(0, this.state.cantidadMostrada).map((serie) => (
+              <Card
+                key={serie.id}
+                id={serie.id}
+                nombre={serie.title}
+                imagen={serie.poster_path}
+                descripcion={serie.overview}
+                tipo="tv"
+              />
+            ))
             ): (
                             <p>No se encontraron series.</p>
                         )}
@@ -86,6 +95,5 @@ class Series extends Component {
     );
   }
 }
-
 
 export default Series;

@@ -61,7 +61,7 @@ class DetalleSerie extends Component {
         return (
             <div>
                 <Header/>
-                <h2 className="alert alert-primary">{this.state.serie.title}</h2>
+                <h2 className="alert alert-primary">{this.state.serie.name}</h2>
                 <section className="row">
                     <img src={"https://image.tmdb.org/t/p/w342/" + this.state.serie.poster_path} className="col-md-6" alt={this.state.serie.title} />
                     <section className="col-md-6 info">
