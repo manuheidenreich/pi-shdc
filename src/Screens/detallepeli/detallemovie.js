@@ -1,91 +1,74 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from '../../Componentes/Header/Header';
 import Cookies from "universal-cookie";
 const cookies = new Cookies();
 
 const apikey = "7aa285e4357da2124c14f7534bfc86a0";
 
-class DetallePelicula extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            pelicula: null,
-            generos: null,
-            esFavorito: false,
-            cookie: cookies.get('usuario')
-        };
-    }
+function DetallePelicula(props) {
+    const[pelicula,setPelicula] = useState(null)
+    const[generos,setGeneros] = useState(null)
+    const[esFavorito,setFavorito] = useState(false)
+    const[cookie,setCookie] = useState(cookies.get("usuario"))
 
-    componentDidMount() {
+    useEffect(()=> {
         let arraypelisfavoritas = JSON.parse(localStorage.getItem("favoritosMovie")) || [];
-       if (arraypelisfavoritas.includes(Number(this.props.match.params.id))) {
-            this.setState({
-                esFavorito: true
-            });
+        if (arraypelisfavoritas.includes(Number(this.props.match.params.id))) {
+            setFavorito(true)
         }
         fetch(`https://api.themoviedb.org/3/movie/${this.props.match.params.id}?api_key=${apikey}`)
             .then(response => response.json())
             .then(data => {
-                console.log(data);
-                this.setState({
-                pelicula: data,
-                generos: data.genres,
-            })})
-            .catch(error => console.log(error));
+                setPelicula(data);
+                setGeneros(data.genres)
+            })
+            .catch(error => console.log(error)); 
+    }, []);
 
-            
+    function agregarAFavoritos() {
+        let arraypelisfavoritas = JSON.parse(localStorage.getItem("favoritosMovie")) || [];
+        if (arraypelisfavoritas.includes(Number(props.match.params.id))) {
+                let nuevoArray = arraypelisfavoritas.filter((id) => id !== props.match.params.id);
+                localStorage.setItem("favoritosMovie", JSON.stringify(nuevoArray));
+                setFavorito(false)
+            } else {
+                arraypelisfavoritas.push(props.match.params.id);
+                localStorage.setItem("favoritosMovie", JSON.stringify(arraypelisfavoritas));
+                setFavorito(true)
+            }
     }
 
-     agregarAFavoritos() {
-        let arraypelisfavoritas = JSON.parse(localStorage.getItem("favoritosMovie")) || [];
-        
-        if (arraypelisfavoritas.includes(Number(this.props.match.params.id))) {
-                let nuevoArray = arraypelisfavoritas.filter((id) => id !== this.props.match.params.id);
-                localStorage.setItem("favoritosMovie", JSON.stringify(nuevoArray));
-                this.setState({
-                    esFavorito: false
-                });
-            } else {
-                arraypelisfavoritas.push(this.props.match.params.id);
-                localStorage.setItem("favoritosMovie", JSON.stringify(arraypelisfavoritas));
-                this.setState({
-                    esFavorito: true
-                });
-            }
-        }
-    render() {
-        if (this.state.pelicula === null) {
-            return (
-                <div>
-                    <img src="./img/cargando.gif" alt="Cargando..."></img>
-                </div>
-            )
-        }
+    if (pelicula === null) {
         return (
             <div>
-                <Header/>
-                <h2 className="alert alert-primary">{this.state.pelicula.title}</h2>
-                <section className="row">
-                    <img src={"https://image.tmdb.org/t/p/w342/" + this.state.pelicula.poster_path} className="col-md-6" alt={this.state.pelicula.title} />
-                    <section className="col-md-6 info">
-                        <h3>Sinópsis</h3>
-                        <p className="description">{this.state.pelicula.overview}</p>
-                        <p className='mt-0 mb-0' id='release-date'><strong>Fecha de estreno:</strong> {this.state.pelicula.release_date}</p>
-                        <p className="mt-0 mb-0 " id="length"><strong>Duración:</strong> {this.state.pelicula.runtime} minutos</p>
-                        <p className="mt-0" id="votes"><strong>Puntuación:</strong> {this.state.pelicula.vote_average}</p>
-                        <p className="mt-0" id="votes"><strong>Genero: </strong>{this.state.generos.map(genero => genero.name).join(" - ")}</p>
-                        {this.state.cookie !== undefined ? (
-                        <button className="btn alert-primary" onClick={() => this.agregarAFavoritos()}>
-                            {this.state.esFavorito ? "♥️" : "🩶"}
-                        </button>
-                    ) : null}
-                    </section>
-                </section>
-
+                <img src="./img/cargando.gif" alt="Cargando..."></img>
             </div>
-
         )
     }
+    return (
+        <div>
+            <Header/>
+            <h2 className="alert alert-primary">{pelicula.title}</h2>
+            <section className="row">
+                <img src={"https://image.tmdb.org/t/p/w342/" + pelicula.poster_path} className="col-md-6" alt={pelicula.title} />
+                <section className="col-md-6 info">
+                    <h3>Sinópsis</h3>
+                    <p className="description">{pelicula.overview}</p>
+                    <p className='mt-0 mb-0' id='release-date'><strong>Fecha de estreno:</strong> {pelicula.release_date}</p>
+                    <p className="mt-0 mb-0 " id="length"><strong>Duración:</strong> {pelicula.runtime} minutos</p>
+                    <p className="mt-0" id="votes"><strong>Puntuación:</strong> {pelicula.vote_average}</p>
+                    <p className="mt-0" id="votes"><strong>Genero: </strong>{generos.map(genero => genero.name).join(" - ")}</p>
+                    {cookie !== undefined ? (
+                    <button className="btn alert-primary" onClick={() => agregarAFavoritos()}>
+                        {esFavorito ? "♥️" : "🩶"}
+                    </button>
+                ) : null}
+                </section>
+            </section>
+
+        </div>
+
+    )
 }
 
 export default DetallePelicula;
